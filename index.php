@@ -11,7 +11,7 @@ include "simple_html_dom.php";
 $query = $_GET["q"];
 $client = $_GET["cl"];
 
-$query_string = str_replace(" ", "_", $query);
+$query_string = str_replace(" ", "%20", $query);
 
 if ($client == "youtube") {
     $query_url = "https://suggestqueries.google.com/complete/search?client=youtube&ds=yt&q=" . $query_string;
