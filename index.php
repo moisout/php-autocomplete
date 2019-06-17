@@ -2,19 +2,24 @@
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: text/html; charset=UTF-8");
 header("Access-Control-Max-Age: 3600");
-# header("Content-Security-Policy: default-src 'self' *.unisg.ch  www.google-analytics.com ajax.googleapis.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' *.unisg.ch *.wemlin.com *.youtube.com *.pinterest.com *.ytimg.com www.googletagmanager.com www.google-analytics.com; connect-src 'self'; img-src 'self'  data: *.ytimg.com yimg.com *.yimg.com *.youtube.com www.google-analytics.com *.g.doubleclick.net; style-src 'self' 'unsafe-inline'; frame-src 'self' *.unisg.ch www.google.com www.youtube.com datawrapper.dwcdn.net pos.vbsg.ch pos.wemlin.com;");
 
-
-header("Content-Security-Policy: default-src 'self' *.unisg.ch www.google-analytics.com ajax.googleapis.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' *.unisg.ch *.wemlin.com *.youtube.com *.pinterest.com *.ytimg.com www.googletagmanager.com www.google-analytics.com; connect-src 'self'; img-src 'self' data: *.ytimg.com yimg.com *.yimg.com *.youtube.com www.google-analytics.com *.g.doubleclick.net; style-src 'self' 'unsafe-inline'; frame-src 'self' *.unisg.ch www.google.com www.youtube.com datawrapper.dwcdn.net pos.vbsg.ch pos.wemlin.com;");
-// header("Content-Security-Policy: default-src 'self' *.unisg.ch www.google-analytics.com ajax.googleapis.com fonts.gstatic.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' *.google.com *.floodlight.com *.unisg.ch *.youtube.com *.pinterest.com *.ytimg.com *.googletagmanager.com *.google-analytics.com paper.li *.scoop.it; connect-src 'self'; img-src 'self' data: *.unisg.ch *.euxeinos.info *.uni-sanktgallen.ch *.ytimg.com yimg.com *.yimg.com *.youtube.com *.google.com *.google-analytics.com *.g.doubleclick.net *.googletagmanager.com; style-src 'self' 'unsafe-inline' *.scoop.it; frame-src 'self' *.unisg.ch *.google.com *.youtube.com datawrapper.dwcdn.net forms.nintex.com verdi.unisg.ch *.doubleclick.net paper.li *.scoop.it *.edoobox.com *.taktwerk.ch *.2vizcon.com pos.wemlin.com; frame-ancestors 'self' *.unisg.ch paper.li *.scoop.it *.facebook.com hsg2.stolzweb.ch;");
+header("Content-Security-Policy: default-src *");
 
 header("X-Frame-Options: ALLOWALL");
-# header("X-Frame-Options: SAMEORIGIN");
 
-include 'simple_html_dom.php';
+include "simple_html_dom.php";
 $query = $_GET["q"];
+$client = $_GET["cl"];
 
-$query_url = 'https://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=' . $query;
+$query_string = str_replace(" ", "_", $query);
+
+if ($client == "youtube") {
+    $query_url = "https://suggestqueries.google.com/complete/search?client=youtube&ds=yt&q=" . $query_string;
+} else if ($client == "google") {
+    $query_url = "https://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=" . $query_string;
+} else {
+    $query_url = "https://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=" . $query_string;
+}
 
 $html = dlPage($query_url);
 
@@ -36,7 +41,7 @@ function dlPage($href)
     // Create a DOM object
     $dom = new simple_html_dom();
     // Load HTML from a string
-    $dom->load($str);
+    $dom->load($str, false, true);
 
     return $dom;
 }
