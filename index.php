@@ -23,7 +23,26 @@ if ($client == "youtube") {
 
 $html = dlPage($query_url);
 
-echo $html;
+$resultPage = str_ireplace("window.google.ac.h(", "", $html);
+
+if ($client == "youtube") {
+    $editedResult = substr($resultPage, 0, -1);
+    $editedResultArray = json_decode($editedResult);
+    $resultArray = array();
+    foreach ($editedResultArray[1] as $key => $value) {
+        array_push($resultArray, $value[0]);
+    }
+    $resultPage = json_encode($resultArray);
+} else {
+    $editedResultArray = json_decode($resultPage);
+    $resultArray = array();
+    foreach ($editedResultArray[1] as $key => $value) {
+        array_push($resultArray, $value);
+    }
+    $resultPage = json_encode($resultArray);
+}
+
+echo $resultPage;
 
 function dlPage($href)
 {
