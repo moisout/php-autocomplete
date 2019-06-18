@@ -10,19 +10,16 @@ Will return
 
 ```
 [
-    "results",
-    [
-        "results esc 2019",
-        "results esc",
-        "results day",
-        "results or excuses",
-        "results eurovision 2019",
-        "results without listening",
-        "results eurovision 2016",
-        "results app",
-        "results trailer",
-        "results may vary"
-    ]
+    "results esc 2019",
+    "results esc",
+    "results day",
+    "results or excuses",
+    "results eurovision 2019",
+    "results without listening",
+    "results eurovision 2016",
+    "results app",
+    "results trailer",
+    "results may vary"
 ]
 ```
 
@@ -39,42 +36,15 @@ will return
 
 ```
 [
-    "results",
-    [
-        [
-            "results esc 2019",
-            0
-        ], [
-            "results trailer german"
-            , 0
-        ], [
-            "results may vary limp bizkit",
-            0
-        ], [
-            "results runtastic",
-            0
-        ], [
-            "results intermittent fasting",
-            0
-        ], [
-            "results without listening",
-            0
-        ], [
-            "results runtastic transformation",
-            0
-        ], [
-            "results esc",
-            0
-        ], [
-            "results day",
-            0
-        ], [
-            "results eurovision 2019",
-            0
-        ]
-    ], {
-        "k": 1,
-        "q": "Tfpqspl5-KiqHLkUksjJHnyeeCU"
-    }
+    "results esc 2019",
+    "results trailer german"
+    "results may vary limp bizkit",
+    "results runtastic",
+    "results intermittent fasting",
+    "results without listening",
+    "results runtastic transformation",
+    "results esc",
+    "results day",
+    "results eurovision 2019",
 ]
 ```
